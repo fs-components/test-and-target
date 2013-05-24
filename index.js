@@ -1,6 +1,6 @@
 
 /**
- * This adds and onclickc handler to the element which first fires an
+ * This adds and onclick handler to the element which first fires an
  * mBox event and delays navigation (default 500ms).
  *
  * Usage: test_and_target(element, {mBoxName: "MyMBox"});
