@@ -1,0 +1,28 @@
+{
+  "name": "test-and-target",
+  "version": "0.0.0",
+  "description": "Component for test and target click monitoring",
+  "main": "index.js",
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "karma": "*"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/fs-components/test-and-target"
+  },
+  "keywords": [
+    "adobe",
+    "omniture"
+  ],
+  "author": "Jared Forsyth <jared@jaredforsyth.com>",
+  "license": "MIT",
+  "readmeFilename": "Readme.md"
+}

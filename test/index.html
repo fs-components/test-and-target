@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Test and Target</title>
+    <link rel="stylesheet" href="../components/visionmedia-mocha/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../components/visionmedia-mocha/mocha.js"></script>
+    <script src="../components/philbooth-spooks.js/src/spooks.min.js"></script>
+    <script src="../build/build.js"></script>
+    <script>mocha.setup('bdd');</script>
+    <script src="index.js"></script>
+    <script>
+      mocha.checkLeaks();
+      mocha.globals(['mboxUpdate', 'mboxDefine']);
+      mocha.run();
+    </script>
+  </body>
+</html>
