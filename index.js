@@ -48,10 +48,10 @@ module.exports = function(el, config){
   }
 
   events.bind(el, 'click', function(e){
-    if (event.preventDefault)
-      event.preventDefault();
+    if (e.preventDefault)
+      e.preventDefault();
     else // IE 8
-      event.returnValue = false;
+      e.returnValue = false;
     mboxUpdate(config.mBoxName, 'Destination=' + href);
     window.setTimeout(function(){
       window.location.href = href;
