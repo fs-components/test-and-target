@@ -15,6 +15,6 @@ node_modules: package.json
 	@npm install
 
 test-web: build
-	open /Applications/Google\ Chrome.app test/index.html
+	open test/index.html
 
 .PHONY: clean test
