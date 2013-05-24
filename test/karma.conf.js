@@ -10,7 +10,7 @@ basePath = '';
 files = [
   MOCHA,
   MOCHA_ADAPTER,
-  '../components/philbooth-spooks.js/src/spooks.min.js',
+  'sinon-1.7.1.js',
   '../build/build.js',
   'index.js'
 ];

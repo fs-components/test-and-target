@@ -4,8 +4,6 @@
   "description": "Component for test and target click monitoring",
   "main": "index.js",
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
     "karma": "*"
   },
   "directories": {

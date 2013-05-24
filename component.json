@@ -9,8 +9,7 @@
   },
   "development": {
     "visionmedia/mocha": "*",
-    "chaijs/chai": "*",
-    "philbooth/spooks.js": "*"
+    "chaijs/chai": "*"
   },
   "license": "MIT",
   "main": "index.js",

@@ -1,10 +1,11 @@
 
-var expect = require("chai").expect;
-var tnt = require('test-and-target');
+var expect = require("chai").expect
+  , tnt = require('test-and-target');
+
 mocha.globals(['mboxUpdate', 'mboxDefine']);
 
 var clickElement = function(el){
-  if (!el.click){
+  if (!el.click){ // phantomjs
     var ev = document.createEvent("MouseEvent");
     ev.initEvent('click', true, false);
     el.dispatchEvent(ev);
@@ -32,10 +33,7 @@ describe("test-and-target", function(){
       el.setAttribute('href', hash);
       document.body.appendChild(el);
       log = {};
-      window.mboxDefine = spooks.fn({
-        name: 'mboxDefine',
-        log: log
-      });
+      window.mboxDefine = sinon.spy();
     });
     afterEach(function(){
       el.parentNode.removeChild(el);
@@ -51,8 +49,8 @@ describe("test-and-target", function(){
     });
     it('should call mboxDefine once', function(){
       expect(tnt(el, {mBoxName: 'french'})).to.be.true;
-      expect(log.counts.mboxDefine).to.eql(1);
-      expect(log.args.mboxDefine[0][1]).to.eql('french');
+      expect(mboxDefine.callCount).to.eql(1);
+      expect(mboxDefine.firstCall.args[1]).to.eql('french');
     });
 
     it('should fail if mboxUpdate is not in global scope', function(){
@@ -68,15 +66,9 @@ describe("test-and-target", function(){
     describe('when the element is clicked', function(){
       var ulog, oldTimeout, delay = 100, mBoxName = 'french';
       beforeEach(function(){
-        window.mboxUpdate = spooks.fn({
-          name: 'mboxUpdate',
-          log: log
-        });
         oldTimeout = setTimeout;
-        window.setTimeout = spooks.fn({
-          name: 'setTimeout',
-          log: log
-        });
+        window.setTimeout = sinon.spy();
+        window.mboxUpdate = sinon.spy();
         tnt(el, {mBoxName: mBoxName, delay: delay});
         clickElement(el);
       });
@@ -85,24 +77,23 @@ describe("test-and-target", function(){
         window.mboxUpdate = undefined;
       });
       it('setTimeout should be called with the right delay', function(){
-        expect(log.counts.setTimeout).to.eql(1);
-        expect(log.args.setTimeout[0][1]).to.eql(delay);
+        expect(setTimeout.callCount).to.eql(1);
+        expect(setTimeout.firstCall.args[1]).to.eql(delay);
       });
       it('the location should change after <delay>', function(){
-        log.args.setTimeout[0][0]();
+        setTimeout.firstCall.args[0]();
         expect(window.location.hash).to.equal(hash);
         window.location.hash = '';
       });
       describe('mboxUpdate', function(){
         it('should be fired', function(){
-          expect(log.counts.mboxUpdate).to.eql(1);
+          expect(mboxUpdate.callCount).to.eql(1);
         });
         it('should be called with the mboxname', function(){
-          expect(log.args.mboxUpdate[0][0]).to.eql(mBoxName);
+          expect(mboxUpdate.firstCall.args[0]).to.eql(mBoxName);
         });
       });
     });
-        
   });
   describe('called twice with the same mboxname and two different els', function(){
     var el, el2, log, mBoxName = 'german';
@@ -115,10 +106,7 @@ describe("test-and-target", function(){
       el2.setAttribute('href', '#el2');
       document.body.appendChild(el2);
       log = {};
-      window.mboxDefine = spooks.fn({
-        name: 'mboxDefine',
-        log: log
-      });
+      window.mboxDefine = sinon.spy();
       window.mboxUpdate = function(){};
     });
     afterEach(function(){
@@ -132,8 +120,8 @@ describe("test-and-target", function(){
     it("shouldn't call mboxDefine twice", function(){
       expect(tnt(el, {mBoxName: mBoxName})).to.be.true;
       expect(tnt(el2, {mBoxName: mBoxName})).to.be.true;
-      expect(log.counts.mboxDefine).to.eql(1);
-      expect(log.args.mboxDefine[0][1]).to.eql(mBoxName);
+      expect(mboxDefine.callCount).to.eql(1);
+      expect(mboxDefine.firstCall.args[1]).to.eql(mBoxName);
     });
   });
 });

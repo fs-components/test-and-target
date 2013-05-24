@@ -8,7 +8,10 @@ components: component.json
 clean:
 	rm -fr build components template.js
 
-test:
-	./node_modules/.bin/karma start test/karma.conf.js
+test: node_modules
+	@./node_modules/.bin/karma start test/karma.conf.js
+
+node_modules: package.json
+	@npm install --dev
 
 .PHONY: clean test
