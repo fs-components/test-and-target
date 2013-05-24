@@ -12,6 +12,9 @@ test: node_modules
 	@./node_modules/.bin/karma start test/karma.conf.js
 
 node_modules: package.json
-	@npm install --dev
+	@npm install
+
+test-web: build
+	open /Applications/Google\ Chrome.app test/index.html
 
 .PHONY: clean test
