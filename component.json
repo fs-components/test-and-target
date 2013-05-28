@@ -1,0 +1,19 @@
+{
+  "name": "test-and-target",
+  "repo": "fs-components/test-and-target",
+  "description": "Provides Test and Target Click handling",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "component/event": "*"
+  },
+  "development": {
+    "visionmedia/mocha": "*",
+    "chaijs/chai": "*"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
